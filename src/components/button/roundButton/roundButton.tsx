@@ -12,7 +12,11 @@ export interface RoundButtonProps
 
 const RoundButton = ({ size = 'md', children, ...rest }: RoundButtonProps) => {
   return (
-    <S.StyledRoundButton variant="round" size={size} {...rest}>
+    <S.StyledRoundButton
+      variant="round"
+      size={size}
+      {...rest} /* eslint-disable-line react/jsx-props-no-spreading */
+    >
       {children}
     </S.StyledRoundButton>
   );

@@ -12,7 +12,11 @@ export interface IconButtonProps
 
 const IconButton = ({ ariaLabel, children, ...rest }: IconButtonProps) => {
   return (
-    <S.StyledIconButton variant="icon" ariaLabel={ariaLabel} {...rest}>
+    <S.StyledIconButton
+      variant="icon"
+      ariaLabel={ariaLabel}
+      {...rest} /* eslint-disable-line react/jsx-props-no-spreading */
+    >
       {children}
     </S.StyledIconButton>
   );

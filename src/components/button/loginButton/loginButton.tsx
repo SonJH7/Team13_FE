@@ -14,7 +14,10 @@ const LoginButton = ({
   ...rest
 }: LoginButtonProps) => {
   return (
-    <S.StyledLoginButton variant="login" {...rest}>
+    <S.StyledLoginButton
+      variant="login"
+      {...rest} /* eslint-disable-line react/jsx-props-no-spreading */
+    >
       {children}
     </S.StyledLoginButton>
   );

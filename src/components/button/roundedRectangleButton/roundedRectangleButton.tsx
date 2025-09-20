@@ -19,7 +19,7 @@ const RoundedRectangleButton = ({
     <S.StyledRoundedRectangleButton
       variant="secondary"
       colorSet={colorSet}
-      {...rest}
+      {...rest} /* eslint-disable-line react/jsx-props-no-spreading */
     >
       {children}
     </S.StyledRoundedRectangleButton>

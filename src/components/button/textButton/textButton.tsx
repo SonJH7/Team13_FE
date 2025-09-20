@@ -10,7 +10,10 @@ export interface TextButtonProps extends Omit<ButtonProps, 'variant'> {
 
 const TextButton = ({ children, ...rest }: TextButtonProps) => {
   return (
-    <S.StyledTextButton variant="text" {...rest}>
+    <S.StyledTextButton
+      variant="text"
+      {...rest} /* eslint-disable-line react/jsx-props-no-spreading */
+    >
       {children}
     </S.StyledTextButton>
   );
