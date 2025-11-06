@@ -48,6 +48,10 @@ export const useFCM = (
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
+  const isBrowser = typeof window !== 'undefined';
+  const isServiceWorkerSupported = isBrowser && 'serviceWorker' in navigator;
+  const isNotificationSupported = isBrowser && 'Notification' in window;
+  const skipServiceWorkerRegistration = process.env.NODE_ENV === 'test';
 
   /**
    * Service Worker 등록
@@ -69,10 +73,23 @@ export const useFCM = (
       }
     };
 
+    if (
+      !isServiceWorkerSupported ||
+      skipServiceWorkerRegistration ||
+      isServiceWorkerRegistered
+    ) {
+      return;
+    }
+
     if (!isServiceWorkerRegistered) {
       void initServiceWorker();
     }
-  }, [isServiceWorkerRegistered, setServiceWorkerRegistered]);
+  }, [
+    isServiceWorkerRegistered,
+    isServiceWorkerSupported,
+    setServiceWorkerRegistered,
+    skipServiceWorkerRegistration,
+  ]);
 
   /**
    * 포그라운드 메시지 리스너 등록
@@ -100,6 +117,12 @@ export const useFCM = (
       setError(null);
 
       try {
+        if (!isNotificationSupported) {
+          throw new Error('이 브라우저에서는 알림을 지원하지 않아요.');
+        }
+        if (!isServiceWorkerSupported) {
+          throw new Error('이 브라우저에서는 푸시 알림을 사용할 수 없어요.');
+        }
         // 1. 알림 권한 요청
         const permission = await requestNotificationPermission();
         setNotificationPermission(permission);
@@ -140,7 +163,9 @@ export const useFCM = (
         setIsLoading(false);
       }
     }, [
+      isNotificationSupported,
       isServiceWorkerRegistered,
+      isServiceWorkerSupported,
       setFCMToken,
       setNotificationPermission,
       setServiceWorkerRegistered,

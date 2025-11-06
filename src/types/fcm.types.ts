@@ -33,10 +33,7 @@ export interface FcmTokenRequest {
   token: string;
 }
 
-export interface FcmTokenResponse {
-  success: boolean;
-  message?: string;
-}
+export type FcmTokenResponse = string;
 
 /**
  * FCM Hook 반환 타입

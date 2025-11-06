@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { registerFCMToken, unregisterFCMToken } from '@/api/fcm';
+import { deleteFcmToken, registerFcmToken } from '@/api/fcm';
 import { useFCM } from '@/hooks/useFCM';
 import { useFCMStore } from '@/stores/fcmStore';
 
@@ -55,7 +55,7 @@ export default function FCMTestPage() {
     }
 
     setApiStatus('토큰 등록 중...');
-    void registerFCMToken(fcmToken).then(
+    void registerFcmToken(fcmToken).then(
       () => {
         setApiStatus('✅ 백엔드에 토큰 등록 성공!');
       },
@@ -69,7 +69,7 @@ export default function FCMTestPage() {
   // 백엔드에서 토큰 해제
   const handleUnregisterToken = useCallback(() => {
     setApiStatus('토큰 해제 중...');
-    void unregisterFCMToken().then(
+    void deleteFcmToken().then(
       () => {
         clearFCM();
         setApiStatus('✅ 백엔드에서 토큰 해제 및 로컬 상태 초기화 완료!');

@@ -1,6 +1,7 @@
 import { authHandlers } from './auth';
 import { certificationHandlers } from './certification';
 import { commonHandlers } from './common';
+import { fcmHandlers } from './fcm';
 import { gamesHandlers } from './games';
 import { profileHandlers } from './profile';
 import { reportsHandlers } from './reports';
@@ -13,6 +14,7 @@ export const handlers = [
   ...authHandlers,
   ...certificationHandlers,
   ...profileHandlers,
+  ...fcmHandlers,
   ...uploadHandlers,
   ...sportsHandlers,
   ...gamesHandlers,

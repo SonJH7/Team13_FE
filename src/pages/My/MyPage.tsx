@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import RouteSkeleton from '@/components/RouteSkeleton';
 import OriginTitleBar from '@/components/titleBar/originTitleBar';
+import NotificationCard from '@/features/fcm/components/NotificationCard';
 import {
   useCurrentUser,
   useEmailVerified,
@@ -120,6 +121,7 @@ export default function MyPage() {
                 로그아웃
               </S.LogoutButton>
             </S.Actions>
+            <NotificationCard />
           </>
         ) : (
           <S.EmptyState>
